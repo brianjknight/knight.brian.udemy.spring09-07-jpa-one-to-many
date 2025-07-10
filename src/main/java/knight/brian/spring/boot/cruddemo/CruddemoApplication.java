@@ -31,8 +31,21 @@ public class CruddemoApplication {
 			// @OneToMany methods
 //			createInstructorWithCourses(appDAO);
 //			findInstructorWithCourses(appDAO);
-			findCoursesForInstructor(appDAO);
+//			findCoursesForInstructor(appDAO);
+			findInstructorWithCoursesJoinFetch(appDAO);
 		};
+	}
+
+	private void findInstructorWithCoursesJoinFetch(AppDAO appDAO) {
+
+		int id = 1;
+		System.out.println("Finding instructor with courses for id: " + id);
+
+		Instructor tempInstructor = appDAO.findInstructorByIdJoinFetch(id);
+		System.out.println("tempInstructor: " + tempInstructor);
+		System.out.println("associated courses: " + tempInstructor.getCourses());
+
+		System.out.println("DONE");
 	}
 
 	private void findCoursesForInstructor(AppDAO appDAO) {
