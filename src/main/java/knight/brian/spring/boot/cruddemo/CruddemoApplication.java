@@ -25,8 +25,23 @@ public class CruddemoApplication {
 //			deleteInstructor(appDAO);
 //			findInstructorDetail(appDAO);
 //			deleteInstructorDetail(appDAO);
-			createInstructorWithCourses(appDAO);
+
+			// @OneToMany methods
+//			createInstructorWithCourses(appDAO);
+			findInstructorWithCourses(appDAO);
 		};
+	}
+
+	private void findInstructorWithCourses(AppDAO appDAO) {
+		int id = 1;
+		System.out.println("Finding instructor for id: " + id);
+
+		Instructor tempInstructor = appDAO.findInstructorById(id);
+
+		System.out.println("tempInstructor: " + tempInstructor);
+		System.out.println("tempInstructor courses: " + tempInstructor.getCourses());
+
+		System.out.println("Done find instructor with courses.");
 	}
 
 	private void createInstructorWithCourses(AppDAO appDAO) {
