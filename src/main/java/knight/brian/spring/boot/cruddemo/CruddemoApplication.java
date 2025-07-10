@@ -9,6 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class CruddemoApplication {
 
@@ -28,10 +30,29 @@ public class CruddemoApplication {
 
 			// @OneToMany methods
 //			createInstructorWithCourses(appDAO);
-			findInstructorWithCourses(appDAO);
+//			findInstructorWithCourses(appDAO);
+			findCoursesForInstructor(appDAO);
 		};
 	}
 
+	private void findCoursesForInstructor(AppDAO appDAO) {
+		int id = 1;
+		System.out.println("Finding instructor for id: " + id);
+
+		Instructor tempInstructor = appDAO.findInstructorById(id);
+		System.out.println("tempInstructor: " + tempInstructor);
+
+		System.out.println("Finding courses for instructor id: " + id);
+		List<Course> courses = appDAO.findCoursesByInstructorId(id);
+
+		tempInstructor.setCourses(courses);
+
+		System.out.println("associated courses: " + tempInstructor.getCourses());
+
+		System.out.println("done");
+	}
+
+	// FetchType.EAGER must be used
 	private void findInstructorWithCourses(AppDAO appDAO) {
 		int id = 1;
 		System.out.println("Finding instructor for id: " + id);

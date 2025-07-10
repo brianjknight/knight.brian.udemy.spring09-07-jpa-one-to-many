@@ -29,7 +29,8 @@ public class Instructor {
 
     // default FetchType.LAZY
     @OneToMany(mappedBy = "instructor",
-               fetch = FetchType.EAGER,
+//               fetch = FetchType.EAGER,
+               fetch = FetchType.LAZY,
                cascade = {CascadeType.PERSIST, CascadeType.MERGE,
                           CascadeType.DETACH, CascadeType.REFRESH})
     List<Course> courses;

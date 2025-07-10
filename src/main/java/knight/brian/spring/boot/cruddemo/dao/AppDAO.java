@@ -1,7 +1,10 @@
 package knight.brian.spring.boot.cruddemo.dao;
 
+import knight.brian.spring.boot.cruddemo.entity.Course;
 import knight.brian.spring.boot.cruddemo.entity.Instructor;
 import knight.brian.spring.boot.cruddemo.entity.InstructorDetail;
+
+import java.util.List;
 
 
 public interface AppDAO {
@@ -15,4 +18,6 @@ public interface AppDAO {
     InstructorDetail findInstructorDetailById(int id);
 
     void deleteInstructorDetailById(int id);
+
+    List<Course> findCoursesByInstructorId(int id);
 }
