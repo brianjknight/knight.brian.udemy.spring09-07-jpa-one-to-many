@@ -1,6 +1,7 @@
 package knight.brian.spring.boot.cruddemo;
 
 import knight.brian.spring.boot.cruddemo.dao.AppDAO;
+import knight.brian.spring.boot.cruddemo.entity.Course;
 import knight.brian.spring.boot.cruddemo.entity.Instructor;
 import knight.brian.spring.boot.cruddemo.entity.InstructorDetail;
 import org.springframework.boot.CommandLineRunner;
@@ -23,8 +24,35 @@ public class CruddemoApplication {
 //			findInstructor(appDAO);
 //			deleteInstructor(appDAO);
 //			findInstructorDetail(appDAO);
-			deleteInstructorDetail(appDAO);
+//			deleteInstructorDetail(appDAO);
+			createInstructorWithCourses(appDAO);
 		};
+	}
+
+	private void createInstructorWithCourses(AppDAO appDAO) {
+		Instructor tempInstructor = new Instructor(
+				"Susan",
+				"Public",
+				"susan@luv2code.com");
+
+		InstructorDetail tempInstructorDetail = new InstructorDetail(
+				"http://www.youtube.com",
+				"Video Games");
+
+		tempInstructor.setInstructorDetail(tempInstructorDetail);
+
+		Course c1 = new Course("Guitar Hero");
+		Course c2 = new Course("Pinball Masterclass");
+
+		tempInstructor.add(c1);
+		tempInstructor.add(c2);
+
+		System.out.println("Saving instructor: "  + tempInstructor);
+		System.out.println("The courses: " + tempInstructor.getCourses());
+		// Also saves courses due to CascadeType.PERSIST
+		appDAO.save(tempInstructor);
+
+		System.out.println("Done saving.");
 	}
 
 	private void deleteInstructorDetail(AppDAO appDAO) {
