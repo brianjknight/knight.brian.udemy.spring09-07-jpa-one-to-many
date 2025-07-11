@@ -22,6 +22,7 @@ public class CruddemoApplication {
 	public CommandLineRunner commandLineRunner(AppDAO appDAO) {
 
 		return runner -> {
+			// @OneToOne methods
 //			createInstructor(appDAO);
 //			findInstructor(appDAO);
 //			deleteInstructor(appDAO);
@@ -32,8 +33,37 @@ public class CruddemoApplication {
 //			createInstructorWithCourses(appDAO);
 //			findInstructorWithCourses(appDAO);
 //			findCoursesForInstructor(appDAO);
-			findInstructorWithCoursesJoinFetch(appDAO);
+//			findInstructorWithCoursesJoinFetch(appDAO);
+			updateInstructor(appDAO);
+			updateCourse(appDAO);
 		};
+	}
+
+	private void updateCourse(AppDAO appDAO) {
+		int id = 100;
+
+		System.out.println("Finding Course for id: " + id);
+		Course tempCourse = appDAO.findCourseById(id);
+
+		System.out.println("updating course...");
+		tempCourse.setTitle("Mario Kart");
+		appDAO.update(tempCourse);
+
+		System.out.println("done updating course");
+	}
+
+	private void updateInstructor(AppDAO appDAO) {
+		int id = 1;
+		System.out.println("Finding instructor for id: " + id);
+
+		Instructor tempInstructor = appDAO.findInstructorById(id);
+		System.out.println("tempInstructor: " + tempInstructor);
+
+		System.out.println("updating instructor...");
+		tempInstructor.setLastName("TESTER");
+
+		appDAO.update(tempInstructor);
+		System.out.println("done updating");
 	}
 
 	private void findInstructorWithCoursesJoinFetch(AppDAO appDAO) {
