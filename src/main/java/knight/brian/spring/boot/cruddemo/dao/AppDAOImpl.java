@@ -39,6 +39,13 @@ public class AppDAOImpl implements AppDAO {
     public void deleteInstructorById(int id) {
         Instructor tempInstructor = entityManager.find(Instructor.class, id);
 
+        // Break association of courses for the Instructor
+        List<Course> courses = tempInstructor.getCourses();
+        for (Course tempCourse : courses) {
+            tempCourse.setInstructor(null);
+            // due to CascadeType Course will update in DB
+        }
+
         entityManager.remove(tempInstructor);
     }
 
@@ -53,8 +60,7 @@ public class AppDAOImpl implements AppDAO {
     public void deleteInstructorDetailById(int id) {
         InstructorDetail instructorDetail = entityManager.find(InstructorDetail.class, id);
 
-        // remove bi-directional link
-
+        // remove associated link to instructorDetail
         instructorDetail.getInstructor().setInstructorDetail(null);
 
         entityManager.remove(instructorDetail);
@@ -107,6 +113,14 @@ public class AppDAOImpl implements AppDAO {
     @Override
     public Course findCourseById(int id) {
         return entityManager.find(Course.class, id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteCourseById(int id) {
+        Course tempCourse = entityManager.find(Course.class, id);
+
+        entityManager.remove(tempCourse);
     }
 
 }

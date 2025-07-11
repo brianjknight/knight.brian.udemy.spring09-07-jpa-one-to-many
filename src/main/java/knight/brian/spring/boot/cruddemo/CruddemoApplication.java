@@ -34,9 +34,20 @@ public class CruddemoApplication {
 //			findInstructorWithCourses(appDAO);
 //			findCoursesForInstructor(appDAO);
 //			findInstructorWithCoursesJoinFetch(appDAO);
-			updateInstructor(appDAO);
-			updateCourse(appDAO);
+//			updateInstructor(appDAO);
+//			updateCourse(appDAO);
+//			deleteInstructor(appDAO);
+			deleteCourse(appDAO);
 		};
+	}
+
+	private void deleteCourse(AppDAO appDAO) {
+		int id = 100;
+		System.out.println("Deleting course id: " + id);
+
+		appDAO.deleteCourseById(id);
+
+		System.out.println("done deleting course");
 	}
 
 	private void updateCourse(AppDAO appDAO) {
@@ -154,10 +165,11 @@ public class CruddemoApplication {
 	}
 
 	private void deleteInstructor(AppDAO appDAO) {
-		int id = 2;
+		int id = 1;
 
 		System.out.println("Deleting instructor ID: " + id);
 		appDAO.deleteInstructorById(id);
+
 		System.out.println("Done deleting");
 	}
 
